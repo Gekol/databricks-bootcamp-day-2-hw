@@ -1,0 +1,74 @@
+# Weather Dashboard Configuration
+# YAML configuration file for the Flask weather dashboard application
+
+# Application settings
+app:
+  name: "Weather Data Dashboard"
+  version: "1.0.0"
+  host: "0.0.0.0"  # Listen on all interfaces
+  port: 8000
+  debug: false  # Set to true for development, false for production
+
+# Database connection settings
+database:
+  schema: "hw-2"  # Lakebase schema name
+  table: "weather_documents"  # Table name for storing weather documents
+
+# Weather API settings
+weather:
+  # List of cities to track
+  locations:
+    - "New York, NY"
+    - "Los Angeles, CA"
+    - "Chicago, IL"
+    - "Houston, TX"
+    - "Phoenix, AZ"
+    - "Philadelphia, PA"
+    - "San Antonio, TX"
+    - "San Diego, CA"
+    - "Dallas, TX"
+    - "Austin, TX"
+    - "San Francisco, CA"
+    - "Seattle, WA"
+    - "Denver, CO"
+    - "Boston, MA"
+    - "Miami, FL"
+    - "Atlanta, GA"
+    - "Portland, OR"
+    - "Las Vegas, NV"
+    - "Detroit, MI"
+    - "Nashville, TN"
+  
+  # API fetch limits and options
+  limit: 50  # Maximum documents to fetch per city per sync
+  include_alerts: true  # Include weather alerts
+  include_forecasts: true  # Include forecast data
+  include_hourly: true  # Include hourly forecasts
+
+# Embedding settings
+embeddings:
+  enabled: true  # Enable automatic embedding generation during sync
+  model_name: "sentence-transformers/all-MiniLM-L6-v2"  # Embedding model to use
+  embedding_dim: 384  # Dimension of embeddings (must match model)
+  chunk_size: 500  # Size of text chunks in characters
+  chunk_overlap: 100  # Overlap between chunks in characters
+  batch_size: 32  # Batch size for embedding generation
+  max_workers: 4  # Maximum parallel workers for embedding
+
+# Dashboard display settings
+dashboard:
+  title: "Today's Forecasts & Alerts"  # Page title
+  documents_per_city: 100  # Number of documents to show per city (not used - shows all for today)
+  auto_refresh_minutes: 5  # Auto-refresh interval (in minutes)
+
+# Sync settings
+sync:
+  timeout_seconds: 60  # Timeout for sync operations
+  retry_attempts: 3  # Number of retry attempts on failure
+  retry_delay_seconds: 2  # Delay between retries
+
+# Logging settings
+logging:
+  level: "INFO"  # Log level: DEBUG, INFO, WARNING, ERROR, CRITICAL
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "weather_dashboard.log"  # Log file name (optional)
